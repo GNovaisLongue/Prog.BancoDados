@@ -40,22 +40,12 @@ class KMeans:
         self.means = random.sample(pontos, self.k) if self.means == None else self.means
         assignments = None
         while True:
-            # associa cada instância a um inteiro 0 <= i < k
             new_assignments = list(map (self.classify, pontos))
-            # se não houver mudança, termina
             if new_assignments == assignments:
                 return
-            # atribuição atual se torna a nova
             assignments = new_assignments
-            # cálculo das novas médias
             for i in range (self.k):
-                # pontos associados ao agrupamento i
-                # note que pontos e assignments estão na ordem
-                # por exemplo pontos = [1, 2, 3] e assignments = [1, 2, 2]
-                # indicam que a primeira instância está no grupo 1 e as demais
-                # no grupo 2
                 i_points = [p for p, a in zip (pontos, assignments) if a == i]
-                # tem alguém nesse grupo?
                 if i_points:
                     self.means[i] = vector_mean (i_points)
 #class Kmeans
@@ -88,7 +78,6 @@ def exibe_grafico(base):
     r2 = mpatches.Patch(color='red', label='segundo parte')
     r3 = mpatches.Patch(color='black', label='terceiro parte')
     base = mpatches.Patch(label=f'base = {len(base)}') 
-    # plt.legend(handles=[h, b])
     plt.legend(handles=[r1, r2, r3, base], bbox_to_anchor=(0., 1.02, 1., .102), loc='lower left',
            ncol=2, mode="expand", borderaxespad=0.)
 
